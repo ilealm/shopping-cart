@@ -8,17 +8,42 @@ var Cart = function(items) {
 };
 
 Cart.prototype.addItem = function(product, quantity) {
-  // TODO: Fill in this instance method to create a new CartItem and add it to this.items
-  var x = new CartItem(product,quantity);
-  console.log(x);
+  if (product!=='')
+  {
+    // TODO: Fill in this instance method to create a new CartItem and add it to this.items
+    var newCarItem = new CartItem(product,quantity);
+    this.items.push(newCarItem);
+  }
 };
 
-Cart.prototype.saveToLocalStorage = function(arrToSave) {
+Cart.prototype.saveToLocalStorage = function() {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
- var storedCart = localStorage.getItem('cart');
- if (storedCart !== null) {
-   var arrCart = JSON.parse(storedCart);
-   arrCart.push(arrToSave);
+ var storedCart = localStorage.getItem('BusMallCart');
+ // review if we have something in cart
+ if (storedCart === null) {
+   var cartToStorage = JSON.stringify(cart.items[0]);
+   localStorage.setItem('BusMallCart', cartToStorage);
+  //alert('create new sto obj');
+ }
+ else{
+  var stoArray = [];
+  stoArray= JSON.parse(storedCart);
+  var newItem =[]; //the one that is already in the array
+  newItem = cart.items[0];
+
+  // console.log('stoArray, from sto: ');
+  // console.log(stoArray);
+  //  console.log('item to store: ' );
+  //  console.log(newItem);
+   var s =[];
+   s.push(stoArray);
+   s.push(newItem);
+   console.log(s);
+   var cartToStorage = JSON.stringify(s);
+   localStorage.setItem('BusMallCart', cartToStorage);
+
+  //  stoArray.items.push(newItem);
+  //  console.log(stoArray)
  }
 
 
