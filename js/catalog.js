@@ -31,8 +31,8 @@ function handleSubmit(event) {
   // TODO: Prevent the page from reloading
 
   // Do all the things ...
-  addSelectedItemToCart();
-  cart.saveToLocalStorage();
+  addSelectedItemToCart(); //DONE. is in app.js
+  cart.saveToLocalStorage(); // working. is in app.js
   updateCounter();
   updateCartPreview();
 
@@ -40,14 +40,14 @@ function handleSubmit(event) {
 
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
-  // TODO: suss out the item picked from the select list
-  // TODO: get the quantity
-  // TODO: using those, add one item to the Cart
+  // TODO: suss out the item picked from the select list. DONE
+  // TODO: get the quantity DONE
+  // TODO: using those, add one item to the Cart DONE
   var item = document.getElementById('items');
   var selecteditem = item.value;
   var quantity = document.getElementById('quantity');
   var selectedQuantity = quantity.value
-  console.log( selecteditem,selectedQuantity);
+  
   cart.addItem(selecteditem, selectedQuantity)
 
 }

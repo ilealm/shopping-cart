@@ -11,8 +11,14 @@ Cart.prototype.addItem = function(product, quantity) {
   if (product!=='')
   {
     // TODO: Fill in this instance method to create a new CartItem and add it to this.items
+    // console.log('showing cart array before creating the new cartItem:')
+    // console.log(cart);
+    // console.log('creating newCarItem: ');
     var newCarItem = new CartItem(product,quantity);
     this.items.push(newCarItem);
+    // console.log(newCarItem);
+    console.log('showing cart array after creating the newCarItem:');
+    console.log(cart);
   }
 };
 
@@ -21,12 +27,18 @@ Cart.prototype.saveToLocalStorage = function() {
  var storedCart = localStorage.getItem('BusMallCart');
  // review if we have something in cart
  if (storedCart === null) {
-   var cartToStorage = JSON.stringify(cart.items[0]);
-   localStorage.setItem('BusMallCart', cartToStorage);
+  //  var cartToStorage = JSON.stringify(cart.items[0]);
+  //  localStorage.setItem('BusMallCart', cartToStorage);
   //alert('create new sto obj');
  }
  else{
   var stoArray = [];
+  /*
+  we know the object we need to store is in cart[0], because we are going
+  to store each time a user select one product.
+  todo: clear the array for the next time
+  mequede
+  */
   stoArray= JSON.parse(storedCart);
   var newItem =[]; //the one that is already in the array
   newItem = cart.items[0];
@@ -35,12 +47,12 @@ Cart.prototype.saveToLocalStorage = function() {
   // console.log(stoArray);
   //  console.log('item to store: ' );
   //  console.log(newItem);
-   var s =[];
-   s.push(stoArray);
-   s.push(newItem);
-   console.log(s);
-   var cartToStorage = JSON.stringify(s);
-   localStorage.setItem('BusMallCart', cartToStorage);
+  //  var s =[];
+  //  s.push(stoArray);
+  //  s.push(newItem);
+  //  console.log(s);
+  //  var cartToStorage = JSON.stringify(s);
+  //  localStorage.setItem('BusMallCart', cartToStorage);
 
   //  stoArray.items.push(newItem);
   //  console.log(stoArray)
@@ -63,7 +75,11 @@ var CartItem = function(product, quantity) {
 var Product = function(filePath, name) {
   this.filePath = filePath;
   this.name = name;
-  Product.allProducts.push(this);
+  // Product.allProduct is like a global variable asociate with the
+  //if we use a global array, it has to exist ouside the contructor,
+  // this is why hey deckare here. is like a glorial variable of the constructor
+  // and how we are using more than 1 js file, we should ise here.
+  Product.allProducts.push(this); //why is here product. and not allProducts.push(this) ??
 };
 Product.allProducts = [];
 
